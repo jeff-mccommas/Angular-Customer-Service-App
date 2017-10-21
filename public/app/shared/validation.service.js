@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ValidationService = (function () {
+var ValidationService = /** @class */ (function () {
     function ValidationService() {
     }
     ValidationService.getValidatorErrorMessage = function (code) {

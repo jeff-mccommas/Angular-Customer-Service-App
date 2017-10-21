@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var property_resolver_1 = require("../shared/property-resolver");
-var DataFilterService = (function () {
+var DataFilterService = /** @class */ (function () {
     function DataFilterService() {
     }
     DataFilterService.prototype.filter = function (datasource, filterProperties, filterData) {
@@ -45,10 +45,10 @@ var DataFilterService = (function () {
             return datasource;
         }
     };
+    DataFilterService = __decorate([
+        core_1.Injectable()
+    ], DataFilterService);
     return DataFilterService;
 }());
-DataFilterService = __decorate([
-    core_1.Injectable()
-], DataFilterService);
 exports.DataFilterService = DataFilterService;
 //# sourceMappingURL=data-filter.service.js.map

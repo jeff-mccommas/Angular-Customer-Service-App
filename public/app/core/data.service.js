@@ -16,7 +16,7 @@ var Observable_1 = require("rxjs/Observable");
 require("rxjs/add/observable/throw");
 require("rxjs/add/operator/map");
 require("rxjs/add/operator/catch");
-var DataService = (function () {
+var DataService = /** @class */ (function () {
     function DataService(http) {
         this.http = http;
         this.baseUrl = '/api/customers';
@@ -116,11 +116,11 @@ var DataService = (function () {
         }
         return Observable_1.Observable.throw(error || 'Node.js server error');
     };
+    DataService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [http_1.Http])
+    ], DataService);
     return DataService;
 }());
-DataService = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http])
-], DataService);
 exports.DataService = DataService;
 //# sourceMappingURL=data.service.js.map

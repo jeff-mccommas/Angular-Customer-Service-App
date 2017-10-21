@@ -12,22 +12,22 @@ var app_component_1 = require("./app.component");
 var app_routing_1 = require("./app.routing");
 var core_module_1 = require("./core/core.module");
 var shared_module_1 = require("./shared/shared.module");
-var AppModule = (function () {
+var AppModule = /** @class */ (function () {
     function AppModule() {
     }
+    AppModule = __decorate([
+        core_1.NgModule({
+            imports: [
+                platform_browser_1.BrowserModule,
+                app_routing_1.appRouting.routes,
+                core_module_1.CoreModule,
+                shared_module_1.SharedModule //Shared (multi-instance) objects
+            ],
+            declarations: [app_component_1.AppComponent, app_routing_1.appRouting.components],
+            bootstrap: [app_component_1.AppComponent]
+        })
+    ], AppModule);
     return AppModule;
 }());
-AppModule = __decorate([
-    core_1.NgModule({
-        imports: [
-            platform_browser_1.BrowserModule,
-            app_routing_1.appRouting.routes,
-            core_module_1.CoreModule,
-            shared_module_1.SharedModule //Shared (multi-instance) objects
-        ],
-        declarations: [app_component_1.AppComponent, app_routing_1.appRouting.components],
-        bootstrap: [app_component_1.AppComponent]
-    })
-], AppModule);
 exports.AppModule = AppModule;
 //# sourceMappingURL=app.module.js.map

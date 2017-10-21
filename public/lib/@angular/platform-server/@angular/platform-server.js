@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.3.0
+ * @license Angular v4.4.6
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -7,7 +7,7 @@ import { ApplicationRef, Inject, Injectable, InjectionToken, Injector, NgModule,
 import { BrowserModule, DOCUMENT, ɵDomAdapter, ɵNAMESPACE_URIS, ɵSharedStylesHost, ɵTRANSITION_ID, ɵflattenStyles, ɵgetDOM, ɵsetRootDomAdapter, ɵshimContentAttribute, ɵshimHostAttribute } from '@angular/platform-browser';
 import { ɵAnimationEngine } from '@angular/animations/browser';
 import { PlatformLocation, ɵPLATFORM_SERVER_ID } from '@angular/common';
-import { HTTP_INTERCEPTORS, HttpBackend, HttpClientModule, HttpHandler, ɵinterceptingHandler } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpBackend, HttpClientModule, HttpHandler, XhrFactory, ɵinterceptingHandler } from '@angular/common/http';
 import { CssSelector, DomElementSchemaRegistry, SelectorMatcher, platformCoreDynamic } from '@angular/compiler';
 import { BrowserXhr, Http, HttpModule, ReadyState, RequestOptions, XHRBackend, XSRFStrategy } from '@angular/http';
 import { NoopAnimationsModule, ɵAnimationRendererFactory } from '@angular/platform-browser/animations';
@@ -266,7 +266,7 @@ function zoneWrappedInterceptingHandler(backend, interceptors) {
 const SERVER_HTTP_PROVIDERS = [
     { provide: Http, useFactory: httpFactory, deps: [XHRBackend, RequestOptions] },
     { provide: BrowserXhr, useClass: ServerXhr }, { provide: XSRFStrategy, useClass: ServerXsrfStrategy },
-    {
+    { provide: XhrFactory, useClass: ServerXhr }, {
         provide: HttpHandler,
         useFactory: zoneWrappedInterceptingHandler,
         deps: [HttpBackend, [new Optional(), HTTP_INTERCEPTORS]]
@@ -528,7 +528,10 @@ class Parse5DomAdapter extends ɵDomAdapter {
             el.attribs['class'] = el.className = value;
         }
         else {
-            el[name] = value;
+            // Store the property in a separate property bag so that it doesn't clobber
+            // actual parse5 properties on the Element.
+            el.properties = el.properties || {};
+            el.properties[name] = value;
         }
     }
     /**
@@ -536,7 +539,9 @@ class Parse5DomAdapter extends ɵDomAdapter {
      * @param {?} name
      * @return {?}
      */
-    getProperty(el, name) { return el[name]; }
+    getProperty(el, name) {
+        return el.properties ? el.properties[name] : undefined;
+    }
     /**
      * @param {?} error
      * @return {?}
@@ -1803,7 +1808,6 @@ class ServerRendererFactory2 {
         this.schema = new DomElementSchemaRegistry();
         this.defaultRenderer = new DefaultServerRenderer2(document, ngZone, this.schema);
     }
-    ;
     /**
      * @param {?} element
      * @param {?} type
@@ -2286,8 +2290,12 @@ the server-rendered app can be properly bootstrapped into a client app.`);
 /**
  * Renders a Module to string.
  *
+ * `document` is the full document HTML of the page to render, as a string.
+ * `url` is the URL for the current render request.
+ * `extraProviders` are the platform level providers for the current render request.
+ *
  * Do not use this in a production server environment. Use pre-compiled {\@link NgModuleFactory} with
- * {link renderModuleFactory} instead.
+ * {\@link renderModuleFactory} instead.
  *
  * \@experimental
  * @template T
@@ -2301,6 +2309,10 @@ function renderModule(module, options) {
 }
 /**
  * Renders a {\@link NgModuleFactory} to string.
+ *
+ * `document` is the full document HTML of the page to render, as a string.
+ * `url` is the URL for the current render request.
+ * `extraProviders` are the platform level providers for the current render request.
  *
  * \@experimental
  * @template T
@@ -2336,7 +2348,7 @@ function renderModuleFactory(moduleFactory, options) {
 /**
  * \@stable
  */
-const VERSION = new Version('4.3.0');
+const VERSION = new Version('4.4.6');
 
 /**
  * @license

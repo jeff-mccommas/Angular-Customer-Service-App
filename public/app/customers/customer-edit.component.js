@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var data_service_1 = require("../core/data.service");
-var CustomerEditComponent = (function () {
+var CustomerEditComponent = /** @class */ (function () {
     function CustomerEditComponent(router, route, dataService) {
         this.router = router;
         this.route = route;
@@ -89,17 +89,17 @@ var CustomerEditComponent = (function () {
             }
         }, function (err) { return console.log(err); });
     };
+    CustomerEditComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'customer-edit',
+            templateUrl: 'customer-edit.component.html'
+        }),
+        __metadata("design:paramtypes", [router_1.Router,
+            router_1.ActivatedRoute,
+            data_service_1.DataService])
+    ], CustomerEditComponent);
     return CustomerEditComponent;
 }());
-CustomerEditComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        selector: 'customer-edit',
-        templateUrl: 'customer-edit.component.html'
-    }),
-    __metadata("design:paramtypes", [router_1.Router,
-        router_1.ActivatedRoute,
-        data_service_1.DataService])
-], CustomerEditComponent);
 exports.CustomerEditComponent = CustomerEditComponent;
 //# sourceMappingURL=customer-edit.component.js.map

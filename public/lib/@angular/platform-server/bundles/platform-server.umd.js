@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.3.0
+ * @license Angular v4.4.6
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -36,7 +36,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v4.3.0
+ * @license Angular v4.4.6
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -308,7 +308,7 @@ function zoneWrappedInterceptingHandler(backend, interceptors) {
 var SERVER_HTTP_PROVIDERS = [
     { provide: _angular_http.Http, useFactory: httpFactory, deps: [_angular_http.XHRBackend, _angular_http.RequestOptions] },
     { provide: _angular_http.BrowserXhr, useClass: ServerXhr }, { provide: _angular_http.XSRFStrategy, useClass: ServerXsrfStrategy },
-    {
+    { provide: _angular_common_http.XhrFactory, useClass: ServerXhr }, {
         provide: _angular_common_http.HttpHandler,
         useFactory: zoneWrappedInterceptingHandler,
         deps: [_angular_common_http.HttpBackend, [new _angular_core.Optional(), _angular_common_http.HTTP_INTERCEPTORS]]
@@ -589,7 +589,10 @@ var Parse5DomAdapter = (function (_super) {
             el.attribs['class'] = el.className = value;
         }
         else {
-            el[name] = value;
+            // Store the property in a separate property bag so that it doesn't clobber
+            // actual parse5 properties on the Element.
+            el.properties = el.properties || {};
+            el.properties[name] = value;
         }
     };
     /**
@@ -597,7 +600,9 @@ var Parse5DomAdapter = (function (_super) {
      * @param {?} name
      * @return {?}
      */
-    Parse5DomAdapter.prototype.getProperty = function (el, name) { return el[name]; };
+    Parse5DomAdapter.prototype.getProperty = function (el, name) {
+        return el.properties ? el.properties[name] : undefined;
+    };
     /**
      * @param {?} error
      * @return {?}
@@ -1871,7 +1876,6 @@ var ServerRendererFactory2 = (function () {
         this.schema = new _angular_compiler.DomElementSchemaRegistry();
         this.defaultRenderer = new DefaultServerRenderer2(document, ngZone, this.schema);
     }
-    
     /**
      * @param {?} element
      * @param {?} type
@@ -2365,8 +2369,12 @@ function _render(platform, moduleRefPromise) {
 /**
  * Renders a Module to string.
  *
+ * `document` is the full document HTML of the page to render, as a string.
+ * `url` is the URL for the current render request.
+ * `extraProviders` are the platform level providers for the current render request.
+ *
  * Do not use this in a production server environment. Use pre-compiled {\@link NgModuleFactory} with
- * {link renderModuleFactory} instead.
+ * {\@link renderModuleFactory} instead.
  *
  * \@experimental
  * @template T
@@ -2380,6 +2388,10 @@ function renderModule(module, options) {
 }
 /**
  * Renders a {\@link NgModuleFactory} to string.
+ *
+ * `document` is the full document HTML of the page to render, as a string.
+ * `url` is the URL for the current render request.
+ * `extraProviders` are the platform level providers for the current render request.
  *
  * \@experimental
  * @template T
@@ -2413,7 +2425,7 @@ function renderModuleFactory(moduleFactory, options) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('4.3.0');
+var VERSION = new _angular_core.Version('4.4.6');
 
 exports.PlatformState = PlatformState;
 exports.ServerModule = ServerModule;

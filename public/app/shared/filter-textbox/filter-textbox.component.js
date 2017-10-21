@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var FilterTextboxComponent = (function () {
+var FilterTextboxComponent = /** @class */ (function () {
     function FilterTextboxComponent() {
         this.model = { filter: null };
         this.changed = new core_1.EventEmitter();
@@ -19,17 +19,17 @@ var FilterTextboxComponent = (function () {
         event.preventDefault();
         this.changed.emit(this.model.filter); //Raise changed event
     };
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", core_1.EventEmitter)
+    ], FilterTextboxComponent.prototype, "changed", void 0);
+    FilterTextboxComponent = __decorate([
+        core_1.Component({
+            selector: 'filter-textbox',
+            template: "\n    <form>\n         Filter:\n         <input type=\"text\" name=\"filter\"\n                [(ngModel)]=\"model.filter\" \n                (keyup)=\"filterChanged($event)\"  />\n    </form>\n  "
+        })
+    ], FilterTextboxComponent);
     return FilterTextboxComponent;
 }());
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], FilterTextboxComponent.prototype, "changed", void 0);
-FilterTextboxComponent = __decorate([
-    core_1.Component({
-        selector: 'filter-textbox',
-        template: "\n    <form>\n         Filter:\n         <input type=\"text\" name=\"filter\"\n                [(ngModel)]=\"model.filter\" \n                (keyup)=\"filterChanged($event)\"  />\n    </form>\n  "
-    })
-], FilterTextboxComponent);
 exports.FilterTextboxComponent = FilterTextboxComponent;
 //# sourceMappingURL=filter-textbox.component.js.map

@@ -14,7 +14,7 @@ var router_1 = require("@angular/router");
 var forms_1 = require("@angular/forms");
 var data_service_1 = require("../core/data.service");
 var validation_service_1 = require("../shared/validation.service");
-var CustomerEditReactiveComponent = (function () {
+var CustomerEditReactiveComponent = /** @class */ (function () {
     function CustomerEditReactiveComponent(router, route, dataService, formBuilder) {
         this.router = router;
         this.route = route;
@@ -111,18 +111,18 @@ var CustomerEditReactiveComponent = (function () {
             }
         }, function (err) { return console.log(err); });
     };
+    CustomerEditReactiveComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'customer-edit-reactive',
+            templateUrl: 'customer-edit-reactive.component.html'
+        }),
+        __metadata("design:paramtypes", [router_1.Router,
+            router_1.ActivatedRoute,
+            data_service_1.DataService,
+            forms_1.FormBuilder])
+    ], CustomerEditReactiveComponent);
     return CustomerEditReactiveComponent;
 }());
-CustomerEditReactiveComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        selector: 'customer-edit-reactive',
-        templateUrl: 'customer-edit-reactive.component.html'
-    }),
-    __metadata("design:paramtypes", [router_1.Router,
-        router_1.ActivatedRoute,
-        data_service_1.DataService,
-        forms_1.FormBuilder])
-], CustomerEditReactiveComponent);
 exports.CustomerEditReactiveComponent = CustomerEditReactiveComponent;
 //# sourceMappingURL=customer-edit-reactive.component.js.map

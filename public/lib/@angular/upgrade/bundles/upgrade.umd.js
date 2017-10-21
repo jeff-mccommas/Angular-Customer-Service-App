@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.3.0
+ * @license Angular v4.4.6
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,7 +10,7 @@
 }(this, (function (exports,_angular_core,_angular_platformBrowserDynamic) { 'use strict';
 
 /**
- * @license Angular v4.3.0
+ * @license Angular v4.4.6
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -29,7 +29,7 @@
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('4.3.0');
+var VERSION = new _angular_core.Version('4.4.6');
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -240,7 +240,6 @@ var INITIAL_VALUE = {
 };
 var DowngradeComponentAdapter = (function () {
     /**
-     * @param {?} id
      * @param {?} element
      * @param {?} attrs
      * @param {?} scope
@@ -251,8 +250,7 @@ var DowngradeComponentAdapter = (function () {
      * @param {?} $parse
      * @param {?} componentFactory
      */
-    function DowngradeComponentAdapter(id, element, attrs, scope, ngModel, parentInjector, $injector, $compile, $parse, componentFactory) {
-        this.id = id;
+    function DowngradeComponentAdapter(element, attrs, scope, ngModel, parentInjector, $injector, $compile, $parse, componentFactory) {
         this.element = element;
         this.attrs = attrs;
         this.scope = scope;
@@ -267,7 +265,6 @@ var DowngradeComponentAdapter = (function () {
         this.componentRef = null;
         this.component = null;
         this.changeDetector = null;
-        this.element[0].id = id;
         this.componentScope = scope.$new();
     }
     /**
@@ -328,22 +325,22 @@ var DowngradeComponentAdapter = (function () {
                 // for `ngOnChanges()`. This is necessary if we are already in a `$digest`, which means that
                 // `ngOnChanges()` (which is called by a watcher) will run before the `$observe()` callback.
                 var /** @type {?} */ unwatch_1 = this_1.componentScope.$watch(function () {
-                    unwatch_1('');
+                    ((unwatch_1))();
                     unwatch_1 = null;
-                    observeFn_1(((attrs))[input.attr]);
+                    observeFn_1(attrs[input.attr]);
                 });
             }
             else if (attrs.hasOwnProperty(input.bindAttr)) {
-                expr = ((attrs) /** TODO #9100 */)[input.bindAttr];
+                expr = attrs[input.bindAttr];
             }
             else if (attrs.hasOwnProperty(input.bracketAttr)) {
-                expr = ((attrs) /** TODO #9100 */)[input.bracketAttr];
+                expr = attrs[input.bracketAttr];
             }
             else if (attrs.hasOwnProperty(input.bindonAttr)) {
-                expr = ((attrs) /** TODO #9100 */)[input.bindonAttr];
+                expr = attrs[input.bindonAttr];
             }
             else if (attrs.hasOwnProperty(input.bracketParenAttr)) {
-                expr = ((attrs) /** TODO #9100 */)[input.bracketParenAttr];
+                expr = attrs[input.bracketParenAttr];
             }
             if (expr != null) {
                 var /** @type {?} */ watchFn = (function (prop) { return function (currValue, prevValue) { return _this.updateInput(prop, prevValue, currValue); }; })(input.prop);
@@ -373,46 +370,47 @@ var DowngradeComponentAdapter = (function () {
         var _this = this;
         var /** @type {?} */ attrs = this.attrs;
         var /** @type {?} */ outputs = this.componentFactory.outputs || [];
-        for (var /** @type {?} */ j = 0; j < outputs.length; j++) {
+        var _loop_2 = function (j) {
             var /** @type {?} */ output = new PropertyBinding(outputs[j].propName, outputs[j].templateName);
             var /** @type {?} */ expr = null;
             var /** @type {?} */ assignExpr = false;
-            var /** @type {?} */ bindonAttr = output.bindonAttr ? output.bindonAttr.substring(0, output.bindonAttr.length - 6) : null;
-            var /** @type {?} */ bracketParenAttr = output.bracketParenAttr ?
-                "[(" + output.bracketParenAttr.substring(2, output.bracketParenAttr.length - 8) + ")]" :
-                null;
+            var /** @type {?} */ bindonAttr = output.bindonAttr.substring(0, output.bindonAttr.length - 6);
+            var /** @type {?} */ bracketParenAttr = "[(" + output.bracketParenAttr.substring(2, output.bracketParenAttr.length - 8) + ")]";
             if (attrs.hasOwnProperty(output.onAttr)) {
-                expr = ((attrs) /** TODO #9100 */)[output.onAttr];
+                expr = attrs[output.onAttr];
             }
             else if (attrs.hasOwnProperty(output.parenAttr)) {
-                expr = ((attrs) /** TODO #9100 */)[output.parenAttr];
+                expr = attrs[output.parenAttr];
             }
-            else if (attrs.hasOwnProperty(/** @type {?} */ ((bindonAttr)))) {
-                expr = ((attrs) /** TODO #9100 */)[((bindonAttr))];
+            else if (attrs.hasOwnProperty(bindonAttr)) {
+                expr = attrs[bindonAttr];
                 assignExpr = true;
             }
-            else if (attrs.hasOwnProperty(/** @type {?} */ ((bracketParenAttr)))) {
-                expr = ((attrs) /** TODO #9100 */)[((bracketParenAttr))];
+            else if (attrs.hasOwnProperty(bracketParenAttr)) {
+                expr = attrs[bracketParenAttr];
                 assignExpr = true;
             }
             if (expr != null && assignExpr != null) {
-                var /** @type {?} */ getter = this.$parse(expr);
-                var /** @type {?} */ setter = getter.assign;
-                if (assignExpr && !setter) {
+                var /** @type {?} */ getter_1 = this_2.$parse(expr);
+                var /** @type {?} */ setter_1 = getter_1.assign;
+                if (assignExpr && !setter_1) {
                     throw new Error("Expression '" + expr + "' is not assignable!");
                 }
-                var /** @type {?} */ emitter = (this.component[output.prop]);
+                var /** @type {?} */ emitter = (this_2.component[output.prop]);
                 if (emitter) {
                     emitter.subscribe({
-                        next: assignExpr ?
-                            (function (setter) { return function (v /** TODO #9100 */) { return setter(_this.scope, v); }; })(setter) :
-                            (function (getter) { return function (v /** TODO #9100 */) { return getter(_this.scope, { '$event': v }); }; })(getter)
+                        next: assignExpr ? function (v) { return ((setter_1))(_this.scope, v); } :
+                            function (v) { return getter_1(_this.scope, { '$event': v }); }
                     });
                 }
                 else {
-                    throw new Error("Missing emitter '" + output.prop + "' on component '" + getComponentName(this.componentFactory.componentType) + "'!");
+                    throw new Error("Missing emitter '" + output.prop + "' on component '" + getComponentName(this_2.componentFactory.componentType) + "'!");
                 }
             }
+        };
+        var this_2 = this;
+        for (var /** @type {?} */ j = 0; j < outputs.length; j++) {
+            _loop_2(/** @type {?} */ j);
         }
     };
     /**
@@ -518,7 +516,6 @@ function matchesSelector(el, selector) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var downgradeCount = 0;
 /**
  * \@whatItDoes
  *
@@ -555,8 +552,6 @@ var downgradeCount = 0;
  * @return {?}
  */
 function downgradeComponent(info) {
-    var /** @type {?} */ idPrefix = "NG2_UPGRADE_" + downgradeCount++ + "_";
-    var /** @type {?} */ idCount = 0;
     var /** @type {?} */ directiveFactory = function ($compile, $injector, $parse) {
         return {
             restrict: 'E',
@@ -574,9 +569,8 @@ function downgradeComponent(info) {
                     if (!componentFactory) {
                         throw new Error('Expecting ComponentFactory for: ' + getComponentName(info.component));
                     }
-                    var /** @type {?} */ id = idPrefix + (idCount++);
                     var /** @type {?} */ injectorPromise = new ParentInjectorPromise$1(element);
-                    var /** @type {?} */ facade = new DowngradeComponentAdapter(id, element, attrs, scope, ngModel, injector, $injector, $compile, $parse, componentFactory);
+                    var /** @type {?} */ facade = new DowngradeComponentAdapter(element, attrs, scope, ngModel, injector, $injector, $compile, $parse, componentFactory);
                     var /** @type {?} */ projectableNodes = facade.compileContents();
                     facade.createComponent(projectableNodes);
                     facade.setupInputs();

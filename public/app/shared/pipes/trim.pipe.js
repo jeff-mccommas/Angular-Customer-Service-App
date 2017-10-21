@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var TrimPipe = (function () {
+var TrimPipe = /** @class */ (function () {
     function TrimPipe() {
     }
     TrimPipe.prototype.transform = function (value) {
@@ -16,10 +16,10 @@ var TrimPipe = (function () {
         }
         return value.trim();
     };
+    TrimPipe = __decorate([
+        core_1.Pipe({ name: 'trim' })
+    ], TrimPipe);
     return TrimPipe;
 }());
-TrimPipe = __decorate([
-    core_1.Pipe({ name: 'trim' })
-], TrimPipe);
 exports.TrimPipe = TrimPipe;
 //# sourceMappingURL=trim.pipe.js.map

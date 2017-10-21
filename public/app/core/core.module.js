@@ -29,25 +29,25 @@ var data_filter_service_1 = require("./data-filter.service");
 var sorter_1 = require("./sorter");
 var trackby_service_1 = require("./trackby.service");
 var ensureModuleLoadedOnceGuard_1 = require("../shared/ensureModuleLoadedOnceGuard");
-var CoreModule = (function (_super) {
+var CoreModule = /** @class */ (function (_super) {
     __extends(CoreModule, _super);
     //Looks for the module in the parent injector to see if it's already been loaded (only want it loaded once)
     function CoreModule(parentModule) {
         return _super.call(this, parentModule) || this;
     }
+    CoreModule = __decorate([
+        core_1.NgModule({
+            imports: [http_1.HttpModule],
+            providers: [
+                //Default XSRF provider setup (change cookie or header name if needed): 
+                //{ provide: XSRFStrategy, useValue: new CookieXSRFStrategy('XSRF-TOKEN', 'X-XSRF-TOKEN') },
+                data_service_1.DataService, data_filter_service_1.DataFilterService, sorter_1.Sorter, trackby_service_1.TrackByService
+            ] // these should be singleton
+        }),
+        __param(0, core_1.Optional()), __param(0, core_1.SkipSelf()),
+        __metadata("design:paramtypes", [CoreModule])
+    ], CoreModule);
     return CoreModule;
 }(ensureModuleLoadedOnceGuard_1.EnsureModuleLoadedOnceGuard));
-CoreModule = __decorate([
-    core_1.NgModule({
-        imports: [http_1.HttpModule],
-        providers: [
-            //Default XSRF provider setup (change cookie or header name if needed): 
-            //{ provide: XSRFStrategy, useValue: new CookieXSRFStrategy('XSRF-TOKEN', 'X-XSRF-TOKEN') },
-            data_service_1.DataService, data_filter_service_1.DataFilterService, sorter_1.Sorter, trackby_service_1.TrackByService
-        ] // these should be singleton
-    }),
-    __param(0, core_1.Optional()), __param(0, core_1.SkipSelf()),
-    __metadata("design:paramtypes", [CoreModule])
-], CoreModule);
 exports.CoreModule = CoreModule;
 //# sourceMappingURL=core.module.js.map

@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var CapitalizePipe = (function () {
+var CapitalizePipe = /** @class */ (function () {
     function CapitalizePipe() {
     }
     CapitalizePipe.prototype.transform = function (value) {
@@ -16,10 +16,10 @@ var CapitalizePipe = (function () {
         }
         return value;
     };
+    CapitalizePipe = __decorate([
+        core_1.Pipe({ name: 'capitalize' })
+    ], CapitalizePipe);
     return CapitalizePipe;
 }());
-CapitalizePipe = __decorate([
-    core_1.Pipe({ name: 'capitalize' })
-], CapitalizePipe);
 exports.CapitalizePipe = CapitalizePipe;
 //# sourceMappingURL=capitalize.pipe.js.map

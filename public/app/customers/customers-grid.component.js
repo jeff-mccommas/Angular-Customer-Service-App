@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var sorter_1 = require("../core/sorter");
 var trackby_service_1 = require("../core/trackby.service");
-var CustomersGridComponent = (function () {
+var CustomersGridComponent = /** @class */ (function () {
     function CustomersGridComponent(sorter, trackby) {
         this.sorter = sorter;
         this.trackby = trackby;
@@ -23,23 +23,23 @@ var CustomersGridComponent = (function () {
     CustomersGridComponent.prototype.sort = function (prop) {
         this.sorter.sort(this.customers, prop);
     };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Array)
+    ], CustomersGridComponent.prototype, "customers", void 0);
+    CustomersGridComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'customers-grid',
+            templateUrl: 'customers-grid.component.html',
+            //When using OnPush detectors, then the framework will check an OnPush 
+            //component when any of its input properties changes, when it fires 
+            //an event, or when an observable fires an event ~ Victor Savkin (Angular Team)
+            changeDetection: core_1.ChangeDetectionStrategy.OnPush
+        }),
+        __metadata("design:paramtypes", [sorter_1.Sorter, trackby_service_1.TrackByService])
+    ], CustomersGridComponent);
     return CustomersGridComponent;
 }());
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Array)
-], CustomersGridComponent.prototype, "customers", void 0);
-CustomersGridComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        selector: 'customers-grid',
-        templateUrl: 'customers-grid.component.html',
-        //When using OnPush detectors, then the framework will check an OnPush 
-        //component when any of its input properties changes, when it fires 
-        //an event, or when an observable fires an event ~ Victor Savkin (Angular Team)
-        changeDetection: core_1.ChangeDetectionStrategy.OnPush
-    }),
-    __metadata("design:paramtypes", [sorter_1.Sorter, trackby_service_1.TrackByService])
-], CustomersGridComponent);
 exports.CustomersGridComponent = CustomersGridComponent;
 //# sourceMappingURL=customers-grid.component.js.map

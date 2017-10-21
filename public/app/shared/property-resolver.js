@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var propertyResolver = (function () {
+var propertyResolver = /** @class */ (function () {
     function propertyResolver() {
     }
     propertyResolver.resolve = function (path, obj) {

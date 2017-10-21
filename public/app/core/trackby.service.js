@@ -7,16 +7,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var TrackByService = (function () {
+var TrackByService = /** @class */ (function () {
     function TrackByService() {
     }
     TrackByService.prototype.customer = function (index, customer) {
         return customer._id;
     };
+    TrackByService = __decorate([
+        core_1.Injectable()
+    ], TrackByService);
     return TrackByService;
 }());
-TrackByService = __decorate([
-    core_1.Injectable()
-], TrackByService);
 exports.TrackByService = TrackByService;
 //# sourceMappingURL=trackby.service.js.map

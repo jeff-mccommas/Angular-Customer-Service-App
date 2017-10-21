@@ -13,17 +13,17 @@ var pagination_component_1 = require("./pagination/pagination.component");
 var capitalize_pipe_1 = require("./pipes/capitalize.pipe");
 var trim_pipe_1 = require("./pipes/trim.pipe");
 var filter_textbox_component_1 = require("./filter-textbox/filter-textbox.component");
-var SharedModule = (function () {
+var SharedModule = /** @class */ (function () {
     function SharedModule() {
     }
+    SharedModule = __decorate([
+        core_1.NgModule({
+            imports: [common_1.CommonModule, forms_1.FormsModule, forms_1.ReactiveFormsModule],
+            declarations: [capitalize_pipe_1.CapitalizePipe, trim_pipe_1.TrimPipe, filter_textbox_component_1.FilterTextboxComponent, pagination_component_1.PaginationComponent],
+            exports: [common_1.CommonModule, forms_1.FormsModule, forms_1.ReactiveFormsModule, capitalize_pipe_1.CapitalizePipe, trim_pipe_1.TrimPipe, filter_textbox_component_1.FilterTextboxComponent, pagination_component_1.PaginationComponent]
+        })
+    ], SharedModule);
     return SharedModule;
 }());
-SharedModule = __decorate([
-    core_1.NgModule({
-        imports: [common_1.CommonModule, forms_1.FormsModule, forms_1.ReactiveFormsModule],
-        declarations: [capitalize_pipe_1.CapitalizePipe, trim_pipe_1.TrimPipe, filter_textbox_component_1.FilterTextboxComponent, pagination_component_1.PaginationComponent],
-        exports: [common_1.CommonModule, forms_1.FormsModule, forms_1.ReactiveFormsModule, capitalize_pipe_1.CapitalizePipe, trim_pipe_1.TrimPipe, filter_textbox_component_1.FilterTextboxComponent, pagination_component_1.PaginationComponent]
-    })
-], SharedModule);
 exports.SharedModule = SharedModule;
 //# sourceMappingURL=shared.module.js.map

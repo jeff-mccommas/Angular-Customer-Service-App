@@ -13,7 +13,7 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var data_filter_service_1 = require("../core/data-filter.service");
 var data_service_1 = require("../core/data.service");
-var CustomersComponent = (function () {
+var CustomersComponent = /** @class */ (function () {
     function CustomersComponent(router, dataService, dataFilter) {
         this.router = router;
         this.dataService = dataService;
@@ -47,17 +47,17 @@ var CustomersComponent = (function () {
             _this.totalRecords = response.totalRecords;
         }, function (err) { return console.log(err); }, function () { return console.log('getCustomersPage() retrieved customers'); });
     };
+    CustomersComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'customers',
+            templateUrl: 'customers.component.html'
+        }),
+        __metadata("design:paramtypes", [router_1.Router,
+            data_service_1.DataService,
+            data_filter_service_1.DataFilterService])
+    ], CustomersComponent);
     return CustomersComponent;
 }());
-CustomersComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        selector: 'customers',
-        templateUrl: 'customers.component.html'
-    }),
-    __metadata("design:paramtypes", [router_1.Router,
-        data_service_1.DataService,
-        data_filter_service_1.DataFilterService])
-], CustomersComponent);
 exports.CustomersComponent = CustomersComponent;
 //# sourceMappingURL=customers.component.js.map

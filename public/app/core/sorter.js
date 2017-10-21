@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var property_resolver_1 = require("../shared/property-resolver");
-var Sorter = (function () {
+var Sorter = /** @class */ (function () {
     function Sorter() {
         this.property = null;
         this.direction = 1;
@@ -48,10 +48,10 @@ var Sorter = (function () {
     Sorter.prototype.isString = function (val) {
         return (val && (typeof val === 'string' || val instanceof String));
     };
+    Sorter = __decorate([
+        core_1.Injectable()
+    ], Sorter);
     return Sorter;
 }());
-Sorter = __decorate([
-    core_1.Injectable()
-], Sorter);
 exports.Sorter = Sorter;
 //# sourceMappingURL=sorter.js.map
